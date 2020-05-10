@@ -9,40 +9,13 @@ class Dataset:
     def __init__(self, ratings):
         self.user_size = len(set(ratings[0]))
         self.item_size = len(set(ratings[1]))
+        self.preprocess_ratings = self._convert_idx(ratings)
+
         #self.item_p = np.zeros(self.item_size)
         #self.user_dict = defaultdict(list)
-
-        self.item_p = self._item_pro(ratings)
-        self.user_dict = self._user_dict(ratings)
-        self.preprocess_ratings = self._convert_idx(ratings)
+        self.item_p = self._item_pro()
+        self.user_dict = self._user_dict()
         self.train_ratings, self.test_ratings = self._split_train_test()
-
-
-    # item prob for negative sampling
-    def _item_pro(self, ratings):
-        items = ratings[1]
-        counts = collections.Counter()
-        item_p = np.zeros(self.item_size)
-
-        for item in items:
-            counts[item] += 1
-        for i in range(self.item_size):
-            print(i,counts[i])
-            item_p[i] = counts[i]
-        item_p /= np.sum(item_p)
-        #print(item_p)
-        return item_p
-
-
-    # item list per user for negative sampling
-    def _user_dict(self, ratings):
-        users = ratings[0]
-        items = ratings[1]
-        user_dict = defaultdict(list)
-        for i in range(len(users)):
-            user_dict[users[i]].append(items[i])
-        return user_dict
-
 
     # convert value to idx
     def _convert_idx(self, ratings):
@@ -56,6 +29,29 @@ class Dataset:
         item_idxs = [item_to_ix[i] for i in item]
         return user_idxs, item_idxs, rating
 
+    # item prob for negative sampling
+    def _item_pro(self):
+        items = self.preprocess_rating[1]
+        counts = collections.Counter()
+        item_p = np.zeros(self.item_size)
+
+        for item in items:
+            counts[item] += 1
+        for i in range(self.item_size):
+            print(i,counts[i])
+            item_p[i] = counts[i]
+        item_p /= np.sum(item_p)
+        print(item_p)
+        return item_p
+
+    # item list per user for negative sampling
+    def _user_dict(self):
+        users = self.preprocess_ratings[0]
+        items = self.preprocess_ratings[1]
+        user_dict = defaultdict(list)
+        for i in range(len(users)):
+            user_dict[users[i]].append(items[i])
+        return user_dict
 
     # split train test data
     def _split_train_test(self):
