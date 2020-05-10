@@ -1,3 +1,4 @@
+import os
 import json
 
 
@@ -9,7 +10,7 @@ def load_data():
     cnt = 0
 
     print("Loading json data...")
-    with open(os.path.abspath(opts.data_path + '/train.json'))as f:
+    with open('/data/private/filter_merge_person') as f:
         line = f.readline()
         while line:
             cnt += 1
