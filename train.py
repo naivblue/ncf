@@ -49,7 +49,7 @@ def train_epoch(train_data):
 
 def main():
     # Load data
-    data = load_data(args.data_path)
+    data = load_data()
     dataset = Dataset(ratings=data)
     evaluation_data = dataset.test_data_loader(args.test_num_negative)
 
