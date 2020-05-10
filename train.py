@@ -52,7 +52,10 @@ def main():
     data = load_data()
     print('user_size is {}, item_size is {}, rating_size is {}'.format(len(data[0]), len(data[1]),len(data[2])))
     dataset = Dataset(ratings=data)
+
+    print('make train and test data...')
     evaluation_data = dataset.test_data_loader(args.test_num_negative)
+
 
     # Build model
     model = MLPnet(user_size=dataset.user_size, item_size=dataset.item_size, embedding_size=args.embedding_size, layers=args.layer)
@@ -62,6 +65,7 @@ def main():
     criterion = nn.BCELoss()
 
     # Train model
+    print('start train...')
     for epoch in range(args.epochs):
         train_data = dataset.train_data_loader(args.train_num_negative, args.batch_size)
         train_epoch(train_data, epoch_id=epoch)

@@ -53,6 +53,7 @@ class Dataset:
 
     # split train test data
     def _split_train_test(self):
+        print('split train and test')
         train_users = []
         train_items = []
         train_ratings = []
