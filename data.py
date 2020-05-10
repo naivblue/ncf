@@ -31,7 +31,7 @@ class Dataset:
 
     # item prob for negative sampling
     def _item_pro(self):
-        items = self.preprocess_rating[1]
+        items = self.preprocess_ratings[1]
         counts = collections.Counter()
         item_p = np.zeros(self.item_size)
 
