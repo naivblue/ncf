@@ -25,7 +25,7 @@ def get_ndcg(top_k):
 def evaluation(evaluation_data, use_cuda, model, epoch):
     model.eval()
     hr_mean, ndcg_mean = [], []
-    k = [1,5, 10]
+    k = [5]
     with torch.no_grad():
         t_users = evaluation_data[0]
         t_items = evaluation_data[1]
@@ -58,4 +58,4 @@ def evaluation(evaluation_data, use_cuda, model, epoch):
 
             hr_mean.append(sum(hr) / len(hr))
             ndcg_mean.append(sum(ndcg) / len(ndcg))
-        print('[Training Epoch {}] top_k is {}, then hit ratio is {}, ndcg is {}'.format(epoch + 1, tk, hr_mean, ndcg_mean))
+        print('[Training Epoch {}] top_k is {}, then hit ratio is {}, ndcg is {}'.format(epoch + 1, k, hr_mean, ndcg_mean))
