@@ -1,11 +1,13 @@
-# coding: utf-8
+#!/usr/bin/env python
+#!coding=utf8
+
 import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
 
-import evaluation as evaluation
-import data_utils as load_data
+from evaluation import evaluation
+from data_utils import load_data
 from mlp import MLPnet
 from data import Dataset
 from argparse import ArgumentParser
