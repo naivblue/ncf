@@ -28,6 +28,8 @@ class Dataset:
             counts[item] += 1
         for i in range(self.item_size):
             item_p[i] = counts[i]
+
+        print(item_p)
         return item_p/np.sum(item_p)
 
 
@@ -38,7 +40,7 @@ class Dataset:
         user_dict = defaultdict(list)
         for i in range(len(users)):
             user_dict[users[i]].append(items[i])
-        return  user_dict
+        return user_dict
 
 
     # convert value to idx
