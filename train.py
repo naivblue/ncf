@@ -67,7 +67,7 @@ def main():
     print('start train...')
     for epoch in range(args.epochs):
         train_data = dataset.train_data_loader(args.train_num_negative, args.batch_size)
-        train_epoch(train_data, epoch_id=epoch)
+        train_epoch(train_data)
 
         # evaluation per train epoch
         evaluation(evaluation_data, args.use_cuda)
