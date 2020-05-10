@@ -2,7 +2,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from engine import Engine
 
 
 class MLPnet(nn.Module):
