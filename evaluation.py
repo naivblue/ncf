@@ -22,7 +22,7 @@ def get_ndcg(top_k):
             return 0
 
 
-def evaluation(evaluation_data, use_cuda):
+def evaluation(evaluation_data, use_cuda, model):
     model.eval()
     hr_mean, ndcg_mean = [], []
     k = [1,5, 10]

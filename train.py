@@ -67,7 +67,7 @@ def main():
         train_epoch(train_data, model, optimizer, criterion)
 
         # evaluation per train epoch
-        evaluation(evaluation_data, args.use_cuda)
+        evaluation(evaluation_data, args.use_cuda, model)
 
         # save model per train epoch
         if epoch % 10 == 0:
