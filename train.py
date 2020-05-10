@@ -73,7 +73,7 @@ def main():
         evaluation(evaluation_data, args.use_cuda)
 
         # save model per train epoch
-        if epoch % 5 == 0:
+        if epoch % 10 == 0:
             #if not os.path.exists(args.model_path):
             #    os.mkdir(args.model_path)
             torch.save(model.state_dict(), '/model.pt')
