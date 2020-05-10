@@ -75,7 +75,7 @@ def main():
             #if not os.path.exists(args.model_path):
             #    os.mkdir(args.model_path)
             torch.save(model.state_dict(), '/model.pt')
-            print("[Saved the trained model successfully.]")
+            #print("[Saved the trained model successfully.]")
 
 
 if __name__ == '__main__':
