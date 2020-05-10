@@ -7,7 +7,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 from evaluation import evaluation
-from data_utils import load_data,item_pro,user_dict
+from data_utils import load_data
 from mlp import MLPnet
 from data import Dataset
 from argparse import ArgumentParser
