@@ -53,7 +53,6 @@ class Dataset:
 
     # split train test data
     def _split_train_test(self):
-        print('split train and test')
         train_users = []
         train_items = []
         train_ratings = []
@@ -81,6 +80,7 @@ class Dataset:
                 train_items.append(items_idx[i])
                 train_ratings.append(self.preprocess_ratings[2][i])
 
+        print('split train and test. train is {}, test is {}'.format(len(train_users), len(test_users)))
         return (train_users, train_items, train_ratings), (test_users, test_items, test_ratings)
 
 

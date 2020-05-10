@@ -51,9 +51,8 @@ def main():
     # Load data
     data = load_data()
     print('user_size is {}, item_size is {}, rating_size is {}'.format(len(data[0]), len(data[1]),len(data[2])))
-    dataset = Dataset(ratings=data)
 
-    print('make train and test data...')
+    dataset = Dataset(ratings=data)
     evaluation_data = dataset.test_data_loader(args.test_num_negative)
 
 
