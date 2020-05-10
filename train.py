@@ -26,7 +26,7 @@ parser.add_argument('--use_cuda', action='store_true', help='use cuda')
 args = parser.parse_args()
 
 
-def train_batch(users, items, targets):
+def train_batch(users, items, targets, model, optimizer, criterion):
     if args.use_cuda is True:
         users, items, targets = users.cuda(), items.cuda(), targets.cuda()
     optimizer.zero_grad()
@@ -38,23 +38,20 @@ def train_batch(users, items, targets):
     return loss
 
 
-def train_epoch(train_data):
+def train_epoch(train_data, model, optimizer, criterion):
     model.train()
     total_loss = 0
     for batch_id, batch in enumerate(train_data):
         users, items, targets = batch[0], batch[1], batch[2]
-        loss = train_batch(users, items, targets)
+        loss = train_batch(users, items, targets, model, optimizer, criterion )
         total_loss += loss
 
 
 def main():
     # Load data
     data = load_data()
-    print('user_size is {}, item_size is {}, rating_size is {}'.format(len(data[0]), len(data[1]),len(data[2])))
-
     dataset = Dataset(ratings=data)
     evaluation_data = dataset.test_data_loader(args.test_num_negative)
-
 
     # Build model
     model = MLPnet(user_size=dataset.user_size, item_size=dataset.item_size, embedding_size=args.embedding_size, layers=args.layer)
@@ -67,7 +64,7 @@ def main():
     print('start train...')
     for epoch in range(args.epochs):
         train_data = dataset.train_data_loader(args.train_num_negative, args.batch_size)
-        train_epoch(train_data)
+        train_epoch(train_data, model, optimizer, criterion)
 
         # evaluation per train epoch
         evaluation(evaluation_data, args.use_cuda)
