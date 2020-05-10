@@ -47,6 +47,7 @@ def train_epoch(train_data, model, optimizer, criterion):
         total_loss += loss
 
 
+
 def main():
     # Load data
     data = load_data()
@@ -67,7 +68,7 @@ def main():
         train_epoch(train_data, model, optimizer, criterion)
 
         # evaluation per train epoch
-        evaluation(evaluation_data, args.use_cuda, model)
+        evaluation(evaluation_data, args.use_cuda, model, epoch)
 
         # save model per train epoch
         if epoch % 10 == 0:

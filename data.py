@@ -109,7 +109,6 @@ class Dataset:
         rating_tensor = torch.FloatTensor(rating)
         train_dataset = TensorDataset(user_tensor, item_tensor, rating_tensor)
         train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-        print('make train negative data')
         return train_loader
 
 
@@ -138,5 +137,4 @@ class Dataset:
         item_tensor = torch.LongTensor(items)
         rating_tensor = torch.FloatTensor(rating)
         test_loader = [user_tensor, item_tensor, rating_tensor]
-        print('make test negative data')
         return test_loader
