@@ -27,10 +27,11 @@ class Dataset:
         for item in items:
             counts[item] += 1
         for i in range(self.item_size):
+            print(i,counts[i])
             item_p[i] = counts[i]
-
-        print(item_p)
-        return item_p/np.sum(item_p)
+        item_p /= np.sum(item_p)
+        #print(item_p)
+        return item_p
 
 
     # item list per user for negative sampling
