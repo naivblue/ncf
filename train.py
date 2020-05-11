@@ -30,6 +30,7 @@ def train_batch(users, items, targets, model, optimizer, criterion):
     if args.use_cuda is True:
         users, items, targets = users.cuda(), items.cuda(), targets.cuda()
     optimizer.zero_grad()
+    model.zero_grad()
     output = model(users, items)
     loss = criterion(output.view(-1), targets)
     loss.backward()
@@ -66,8 +67,6 @@ def main():
     print('start train...')
     for epoch in range(args.epochs):
         train_epoch(train_data, model, optimizer, criterion)
-
-        # evaluation per train epoch
         evaluation(evaluation_data, args.use_cuda, model, epoch)
 
         # save model per train epoch
