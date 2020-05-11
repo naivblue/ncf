@@ -52,6 +52,7 @@ def main():
     # Load data
     data = load_data()
     dataset = Dataset(ratings=data)
+    train_data = dataset.train_data_loader(args.train_num_negative, args.batch_size)
     evaluation_data = dataset.test_data_loader(args.test_num_negative)
 
     # Build model
@@ -64,7 +65,6 @@ def main():
     # Train model
     print('start train...')
     for epoch in range(args.epochs):
-        train_data = dataset.train_data_loader(args.train_num_negative, args.batch_size)
         train_epoch(train_data, model, optimizer, criterion)
 
         # evaluation per train epoch
