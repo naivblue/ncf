@@ -11,8 +11,6 @@ class Dataset:
         self.item_size = len(set(ratings[1]))
         self.preprocess_ratings = self._convert_idx(ratings)
 
-        #self.item_p = np.zeros(self.item_size)
-        #self.user_dict = defaultdict(list)
         self.item_p = self._item_pro()
         self.user_dict = self._user_dict()
         self.train_ratings, self.test_ratings = self._split_train_test()
