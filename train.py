@@ -43,11 +43,14 @@ def train_batch(users, items, targets, model, optimizer, criterion):
 def train_epoch(train_data, model, optimizer, criterion, epoch):
     model.train()
     total_loss = 0
+    batch_cnt = 0
     for batch_id, batch in enumerate(train_data):
         users, items, targets = batch[0], batch[1], batch[2]
         loss = train_batch(users, items, targets, model, optimizer, criterion )
         total_loss += loss
-    print('[Training Epoch {}] Total Loss {}'.format(epoch + 1, total_loss ))
+        batch_cnt += 1
+    mean_loss = total_loss/batch_cnt
+    print('[Training Epoch {}] Total Loss {}'.format(epoch + 1, mean_loss ))
 
 
 
