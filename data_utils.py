@@ -5,8 +5,7 @@ def load_data(data_path):
     users = []
     items = []
     ratings = []
-    twt = []
-    cnt = 0
+    twts = []
 
     print("Loading json data...")
     with open(os.path.abspath(data_path + '/merge_movie')) as f:
@@ -21,7 +20,7 @@ def load_data(data_path):
             users.append(user)
             items.append(item)
             ratings.append(1)
-            twt.append(twt)
+            twts.append(twt)
             line = f.readline()
     print('user_size is {}, item_size is {}, rating_size is {}'.format(len(users),len(items),len(ratings)))
-    return users, items, ratings,twt
+    return users, items, ratings, twts
