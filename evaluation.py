@@ -25,7 +25,7 @@ def get_ndcg(top_k):
 def evaluation(evaluation_data, use_cuda, model, epoch):
     model.eval()
     hr_mean, ndcg_mean = [], []
-    k = [5]
+    k = [10]
     with torch.no_grad():
         t_users = evaluation_data[0]
         t_items = evaluation_data[1]

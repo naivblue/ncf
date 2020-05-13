@@ -20,12 +20,13 @@ class Dataset:
         user = ratings[0]
         item = ratings[1]
         rating = ratings[2]
+        twt = ratings[3]
 
         user_to_ix = {value: i for i, value in enumerate(set(user))}
         item_to_ix = {value: i for i, value in enumerate(set(item))}
         user_idxs = [user_to_ix[i] for i in user]
         item_idxs = [item_to_ix[i] for i in item]
-        return user_idxs, item_idxs, rating
+        return user_idxs, item_idxs, rating, twt
 
     # item prob for negative sampling
     def _item_pro(self):
@@ -61,15 +62,17 @@ class Dataset:
 
         users_idx = self.preprocess_ratings[0]
         items_idx = self.preprocess_ratings[1]
+        twt = self.preprocess_ratings[3]
 
-        train_user = defaultdict(int)
+        test_user_cnt = defaultdict(int)
         for i, user in enumerate(users_idx):
-            train_user[user] += 1
+            test_user_cnt[user] = 0
 
-            # test data는 user-item pair가 2개 이상인 user만 대상으로 함
-            # test data에 있는 user는 train에 반드시 포함되어 있는 user이며, test는 user당 1개의 user-item pair데이터만 가짐
-            if train_user[user] == 2 and test_cnt < 10000:
+            #leave-one-out evaluation
+            #user-item interaction 중 가장 최근에 발생한 1개 user-item interaction 만 test data에 할당
+            if twt[i] == 1 and test_user_cnt[user] < 1 and test_cnt < 10000:
                 test_cnt += 1
+                test_user_cnt[user] += 1
                 test_users.append(users_idx[i])
                 test_items.append(items_idx[i])
                 test_ratings.append(self.preprocess_ratings[2][i])
