@@ -70,7 +70,7 @@ class Dataset:
 
             #leave-one-out evaluation
             #user-item interaction 중 가장 최근에 발생한 1개 user-item interaction 만 test data에 할당
-            if twt[i] == 1 and test_user_cnt[user] < 1 and test_cnt < 10000:
+            if twt[i] == 1 and test_user_cnt[user] < 1:
                 test_cnt += 1
                 test_user_cnt[user] += 1
                 test_users.append(users_idx[i])
