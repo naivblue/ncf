@@ -1,6 +1,5 @@
 # NCF
-Neural Collaborative Filtering recommendation
-
+Neural collaborative filtering(NCF)는 nueral networks를 사용하여 user-item interaction 데이터를 학습하는 deep learning based framework 이다. 해당 코드는 Multi-Layer Percenptron(MLP)으로 학습한다.
 
 
 ### data
