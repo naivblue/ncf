@@ -96,7 +96,7 @@ class Dataset:
         for u in uniq_users:
             iters = 0
             while iters < ng_sample_size:
-                j = np.random.choice(self.item_size, p=self.item_p)
+                j = np.random.choice(self.item_size)
                 if j not in self.user_dict[u]:
                     users.append(u)
                     items.append(j)
